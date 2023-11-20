@@ -16,7 +16,7 @@ function ChatUi() {
     dispatch(authActions.islogin(token));
     const interValidId = setInterval(() => {
       fetchData();
-    }, 50000);
+    }, 1000);
 
     return () => {
       clearInterval(interValidId);
@@ -48,6 +48,7 @@ function ChatUi() {
           },
         }
       );
+      setMessage('')
       console.log(response.data);
     } catch (err) {
       console.log(err);
