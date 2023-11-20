@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 export default function AuthForm() {
   const [isSignup, setIsSignup] = useState(true);
@@ -7,6 +9,8 @@ export default function AuthForm() {
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [password, setPassword] = useState("");
+
+  const navigate=useNavigate()
 
   const submitHandler = async (event) => {
     event.preventDefault();
@@ -19,12 +23,14 @@ export default function AuthForm() {
           phonenumber: phone,
           password,
         });
+        navigate("/chat")
         console.log(response);
       } else {
         const response = await axios.post("http://localhost:3000/login", {
           email,
           password,
         });
+        navigate("/chat")
         console.log(response);
       }
     } catch (err) {
@@ -93,7 +99,8 @@ export default function AuthForm() {
             type="submit"
             className="w-full bg-blue-500 text-white p-2 rounded hover:bg-blue-600 focus:outline-none focus:ring focus:border-blue-300"
           >
-            {isSignup ? "Sign Up" : "Sign In"}
+            <Link to='/chat'>{isSignup ? "Sign Up" : "Sign In"}</Link>
+            
           </button>
         </form>
         <p className="mt-4 text-sm text-gray-600 text-center">
