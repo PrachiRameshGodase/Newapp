@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { authActions } from "../store/AuthReducer";
 
 export default function AuthForm() {
   const [isSignup, setIsSignup] = useState(true);
@@ -11,6 +13,8 @@ export default function AuthForm() {
   const [password, setPassword] = useState("");
 
   const navigate=useNavigate()
+  const dispatch=useDispatch()
+  const isLoggedIn=useSelector((state)=>state.auth.isAuthenticated)
 
   const submitHandler = async (event) => {
     event.preventDefault();
@@ -23,15 +27,28 @@ export default function AuthForm() {
           phonenumber: phone,
           password,
         });
+        const {token}=response.data;
+        const {userId}=response.data
+        localStorage.setItem("userId",userId)
+        localStorage.setItem("token",token)
+        localStorage.setItem("email",email)
+        dispatch(authActions.islogin(token))
         navigate("/chat")
-        console.log(response);
+        
       } else {
         const response = await axios.post("http://localhost:3000/login", {
           email,
           password,
         });
+        console.log(response.data)
+        const {token}=response.data;
+        const {userId}=response.data
+        localStorage.setItem("userId",userId)
+        localStorage.setItem("token",token)
+        localStorage.setItem("email",email)
+        dispatch(authActions.islogin(token))
         navigate("/chat")
-        console.log(response);
+      
       }
     } catch (err) {
       alert(err);
