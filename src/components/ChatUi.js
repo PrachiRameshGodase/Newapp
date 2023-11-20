@@ -11,16 +11,6 @@ function ChatUi() {
   const token = localStorage.getItem("token");
   const dispatch = useDispatch();
 
-  const fetchData = async () => {
-    const response = await axios.get("http://localhost:3000/chats", {
-      headers: {
-        Authorization: token,
-      },
-    });
-    console.log("response", response);
-    setchatData(response.data.data);
-  };
-
   useEffect(() => {
     fetchData();
     dispatch(authActions.islogin(token));
@@ -32,6 +22,18 @@ function ChatUi() {
       clearInterval(interValidId);
     };
   }, []);
+
+  const fetchData = async () => {
+    const response = await axios.get("http://localhost:3000/chats", {
+      headers: {
+        Authorization: token,
+      },
+    });
+    console.log("response", response);
+    setchatData(response.data.data);
+  };
+
+  
 
   const submitHandler = async (e) => {
     e.preventDefault();
