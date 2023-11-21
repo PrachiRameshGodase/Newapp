@@ -25,6 +25,7 @@
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   transition: color 0.3s;
+  
   }
   .logo:hover {
     /* font-size: 24px; */

@@ -33,8 +33,6 @@ function ChatUi() {
     setchatData(response.data.data);
   };
 
-  
-
   const submitHandler = async (e) => {
     e.preventDefault();
     console.log(message);
@@ -48,7 +46,7 @@ function ChatUi() {
           },
         }
       );
-      setMessage('')
+      setMessage("");
       console.log(response.data);
     } catch (err) {
       console.log(err);
@@ -60,11 +58,11 @@ function ChatUi() {
       <div className="rounded-sm mt-3">
         {chatData &&
           chatData.map((item) => (
-            <p key={item.id} className="mb-2">
+            <div key={item.id} className="mb-2">
               <p className="font-semibold bg-gray-100 border p-3  ml-60 mr-60 rounded-lg ">
                 {item.user.name}: {item.message}
               </p>
-            </p>
+            </div>
           ))}
       </div>
 

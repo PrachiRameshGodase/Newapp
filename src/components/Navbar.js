@@ -11,6 +11,7 @@ function Navbar() {
     const dispatch = useDispatch();
     const isAuth = useSelector((state) => state.auth.isAuthenticated);
     const token=localStorage.getItem('token')
+    console.log(token,"token from navbar")
     const enteredEmail=localStorage.getItem('email')
     const navigate = useNavigate();
 
@@ -19,9 +20,7 @@ function Navbar() {
         setIsHovered((prevValue) => !prevValue);
       }
 
-      useEffect(()=>{
-        dispatch(authActions.islogin(token))
-      })
+      
 
       const logOutHandler=()=>{
         dispatch(authActions.islogout())
@@ -39,7 +38,8 @@ function Navbar() {
           justifyContent: "space-between",
         }}
       >
-        <h1 className={`mr-8 text-gray-100 font-bold ${classes.logo} `}>
+        <h1 className={`mr-8 text-gray-100 font-bold ${classes.logo}  `}>
+        
           Group Chat App
         </h1>
 

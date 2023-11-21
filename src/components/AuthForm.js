@@ -31,8 +31,9 @@ export default function AuthForm() {
         const {userId}=response.data
         localStorage.setItem("userId",userId)
         localStorage.setItem("token",token)
+        console.log(token,"token from authform")
         localStorage.setItem("email",email)
-        dispatch(authActions.islogin(token))
+     
         navigate("/chat")
         
       } else {
@@ -45,6 +46,7 @@ export default function AuthForm() {
         const {userId}=response.data
         localStorage.setItem("userId",userId)
         localStorage.setItem("token",token)
+        console.log(token,"token from login")
         localStorage.setItem("email",email)
         dispatch(authActions.islogin(token))
         navigate("/chat")
