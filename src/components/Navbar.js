@@ -6,8 +6,10 @@ import { authActions } from "../store/AuthReducer"
 import { useNavigate } from "react-router-dom";
 import axios from "axios"
 import { Avatar,Tooltip } from '@mui/material';
+
 function Navbar() {
     const [isHovered, setIsHovered] = useState(false);
+    const [isBouncing, setIsBouncing] = useState(true);
     const dispatch = useDispatch();
     const isAuth = useSelector((state) => state.auth.isAuthenticated);
     const token=localStorage.getItem('token')
@@ -25,6 +27,11 @@ function Navbar() {
       const logOutHandler=()=>{
         dispatch(authActions.islogout())
         navigate("/")
+      }
+
+      const AdminGroupHandler=()=>{
+        navigate("/admingroups")
+        setIsBouncing(false)
       }
     
   return (
@@ -77,7 +84,12 @@ function Navbar() {
               </Tooltip>
             )}
          
-          
+          {isAuth && (<button
+          className={`bg-gradient-to-r from-red-600 via-green-500 to-red-600 py-2 px-4 font-bold text-white rounded hover:bg-red-800  ${
+            isBouncing ? classes.bouncing : ''
+          }`}
+           onClick={AdminGroupHandler}
+          >Admin Groups</button>)}
           {isAuth && (
             <button
               className='bg-gradient-to-b from-red-600 via-red-500 to-red-800  hover:bg-purple-600 py-2 px-4 font-bold text-white rounded mx-5 '

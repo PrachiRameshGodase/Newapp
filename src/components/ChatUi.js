@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import { authActions } from "../store/AuthReducer";
+import ChatGroups from "./ChatGroups";
 
 function ChatUi() {
   const isLoggedIn = useSelector((state) => state.auth.isAuthenticated);
@@ -54,7 +55,8 @@ function ChatUi() {
   };
 
   return (
-    <div className="h-screen ">
+    <div className="h-screen  ">
+      {/* <ChatGroups/> */}
       <div className="rounded-sm mt-3">
         {chatData &&
           chatData.map((item) => (
@@ -65,8 +67,9 @@ function ChatUi() {
             </div>
           ))}
       </div>
-
-      <form onSubmit={submitHandler} className="mt-4 ml-96 ">
+     <div className="flex">
+     <ChatGroups className=''/>
+     <form onSubmit={submitHandler} className=" ml-96 mt-4 ">
         <input
           type="text"
           value={message}
@@ -76,11 +79,15 @@ function ChatUi() {
         />
         <button
           type="submit"
-          className="bg-blue-500 text-white p-2 px-4 rounded-lg text-lg"
+          className="bg-blue-600 text-white p-2 px-4 rounded-lg text-lg"
         >
           Send
         </button>
       </form>
+    
+     </div>
+
+     
     </div>
   );
 }
