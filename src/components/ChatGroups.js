@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 
 function ChatGroups() {
@@ -20,13 +20,13 @@ function ChatGroups() {
         },
         { headers: { Authorization: localStorage.getItem("token") } }
       );
-      setGroupname(response.data.data)
+      setGroupname(response.data.data);
       // ...
     } catch (err) {
       console.log(err);
     }
   };
-  
+
   return (
     <div className="flex">
       <button
