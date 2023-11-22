@@ -12,13 +12,14 @@ function AdminGroups() {
   const token = localStorage.getItem('token');
 
   const fetchData = async () => {
-    // const response = await axios.get("http://localhost:3000/admingroups", {
-    //   headers: {
-    //     Authorization: localStorage.getItem("token"),
-    //   },
-    // });
-    // console.log(response.data.data);
-    // setGroupname(response.data.data);
+    const response = await axios.get("http://localhost:3000/admingroups", {
+      headers: {
+        Authorization: localStorage.getItem("token"),
+      },
+    });
+    console.log(response,"admaindatafetched")
+    console.log(response.data.data);
+    setGroupname(response.data.data);
   };
 
   useEffect(() => {
