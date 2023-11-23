@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import { authActions } from "../store/AuthReducer";
 import ChatGroups from "./ChatGroups";
+import io from "socket.io-client"
+const socket=io("http://localhost:3000")
 
 function ChatUi() {
   const isLoggedIn = useSelector((state) => state.auth.isAuthenticated);
@@ -12,17 +14,18 @@ function ChatUi() {
   const token = localStorage.getItem("token");
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    fetchData();
-    dispatch(authActions.islogin(token));
-    const interValidId = setInterval(() => {
-      fetchData();
-    }, 1000000000);
 
-    return () => {
-      clearInterval(interValidId);
-    };
-  }, []);
+useEffect(()=>{
+  fetchData()
+  //new messages from the server
+  socket.on("newMessage",(newMessage)=>{
+    console.log(newMessage)
+    setchatData((prevdata)=>[...prevdata,newMessage])
+  })
+  return ()=>{
+    socket.off("newMessage") //remove it like cleanup function it works
+  }
+},[])
 
   const fetchData = async () => {
     const response = await axios.get("http://localhost:3000/chats", {
@@ -36,21 +39,10 @@ function ChatUi() {
 
   const submitHandler = async (e) => {
     e.preventDefault();
-    console.log(message);
-    try {
-      const response = await axios.post(
-        "http://localhost:3000/chats",
-        { message },
-        {
-          headers: {
-            Authorization: localStorage.getItem("token"),
-          },
-        }
-      );
-      setMessage("");
-      console.log(response.data);
-    } catch (err) {
-      console.log(err);
+  
+    if(message.trim()!==""){
+      socket.emit("sendMessage",{message,userId})
+      setMessage("")
     }
   };
 
