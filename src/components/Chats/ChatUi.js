@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
-import { authActions } from "../store/AuthReducer";
+import { authActions } from "../../store/AuthReducer"
 import ChatGroups from "./ChatGroups";
 import io from "socket.io-client"
 const socket=io("http://localhost:3000")

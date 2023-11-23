@@ -1,8 +1,8 @@
 import React, { useEffect, useState} from "react";
 import { useSelector, useDispatch } from "react-redux";
-import classes from "../components/Navbar.module.css"
+import classes from "../../components/Layout/Navbar.module.css"
 import { Link } from "react-router-dom";
-import { authActions } from "../store/AuthReducer"
+import { authActions } from "../../store/AuthReducer"
 import { useNavigate } from "react-router-dom";
 import axios from "axios"
 import { Avatar,Tooltip } from '@mui/material';
@@ -31,6 +31,11 @@ function Navbar() {
 
       const AdminGroupHandler=()=>{
         navigate("/admingroups")
+        setIsBouncing(false)
+      }
+
+      const groupsHandler=()=>{
+        navigate("/allgroups")
         setIsBouncing(false)
       }
     
@@ -83,9 +88,15 @@ function Navbar() {
                 </Avatar>
               </Tooltip>
             )}
+             {isAuth && (<button
+          className={`bg-gradient-to-r from-red-600 via-green-500 to-red-600 py-2 px-4 font-bold text-white rounded hover:bg-red-800  ${
+            isBouncing ? classes.bouncing : ''
+          }`}
+           onClick={groupsHandler}
+          >Groups</button>)}
          
           {isAuth && (<button
-          className={`bg-gradient-to-r from-red-600 via-green-500 to-red-600 py-2 px-4 font-bold text-white rounded hover:bg-red-800  ${
+          className={`bg-gradient-to-r from-red-600 via-green-500 to-red-600 py-2 px-4 font-bold text-white rounded hover:bg-red-800 ml-5 ${
             isBouncing ? classes.bouncing : ''
           }`}
            onClick={AdminGroupHandler}

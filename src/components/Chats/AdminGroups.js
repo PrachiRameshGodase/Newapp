@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { authActions } from "../store/AuthReducer";
+import { authActions } from "../../store/AuthReducer"
 
 function AdminGroups() {
   const dispatch = useDispatch();
@@ -122,6 +122,7 @@ function AdminGroups() {
     </div> */}
         {groupName &&
           groupName.map((item) => (
+            
             <li
               key={item.id}
               onClick={() => handleGroupClick(item)}

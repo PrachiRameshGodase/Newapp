@@ -3,7 +3,7 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { authActions } from "../store/AuthReducer";
+import { authActions } from "../../store/AuthReducer";
 
 export default function AuthForm() {
   const [isSignup, setIsSignup] = useState(true);
