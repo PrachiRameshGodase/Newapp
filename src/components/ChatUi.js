@@ -16,7 +16,11 @@ function ChatUi() {
 
 
 useEffect(()=>{
+  if(token){
+    dispatch(authActions.islogin(token))
+  }
   fetchData()
+  
   //new messages from the server
   socket.on("newMessage",(newMessage)=>{
     console.log(newMessage)
